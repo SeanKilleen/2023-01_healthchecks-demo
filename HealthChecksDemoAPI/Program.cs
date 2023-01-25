@@ -11,7 +11,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks()
     .AddCheck<DummyHealthCheck>("Dummy")
     // ReSharper disable once NotResolvedInText -- no way to resolve "EventStore Connection String" within this format.
-    .AddSqlServer("Server=localhost;Database=operation-preparation;User Id=sa;Password=yourStrong(!)Password;Trust Server Certificate=true")
+
+    // NOTE: This is obviously a dummy database for demo purposes. You'd get the connection string from configuration. Don't store plain-text credentials in your code.
+    // This was used with a Docker image of SQL Server to show spinning it up and down.
+    .AddSqlServer("Server=localhost;Database=MyDBServer;User Id=sa;Password=yourStrong(!)Password;Trust Server Certificate=true")
     .AddApplicationInsightsPublisher();
 builder.Services
     .AddHealthChecksUI(setup =>
